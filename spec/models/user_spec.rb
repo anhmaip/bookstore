@@ -121,7 +121,8 @@ describe User do
 
   describe "when phone format is valid" do
     it "should be valid" do
-      phones = ["+04 574 0350",
+      phones = ["",
+                "+04 574 0350",
                 "38 27 27 27",
                 "0989-097-680",
                 "+ 84 4 1234566",

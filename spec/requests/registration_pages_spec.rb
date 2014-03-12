@@ -30,28 +30,31 @@ describe "Registration pages" do
       let(:user) { FactoryGirl.build(:user) }
 
       before do
-        fill_in "Full name", with: "Test User"
-        fill_in "Email", with: "testuser@example.com"
-        fill_in "Password", with: "password"
-        fill_in "Password confirmation", with: "password"
-        fill_in "Phone", with: "+041234567"
-        fill_in "Birthday", with: "04/11/1990"
+        fill_in "Full name", with: user.full_name
+        fill_in "Email", with: user.email
+        fill_in "Password", with: user.password
+        fill_in "Password confirmation", with: user.password_confirmation
+        fill_in "Phone", with: user.phone
+        fill_in "Birthday", with: user.birthday
       end
 
       it "should create a user" do
         expect { click_button signup }.to change(User, :count).by(1)
       end
 
-      describe "after saving the user" do
-        before { click_button signup }
-        let(:user) { User.find_by(email: 'testuser@example.com') }
+      describe "should show confirmation message to user after saving the user" do
+        before do
+          ActionMailer::Base.deliveries.clear
+          click_button signup
+        end
 
-        # TODO change when add email confirm
-        it { should have_link(signout) }
-        it { should have_link(edit) }
-        it { should have_content("Test User") }
+        it { should have_content('confirmation link has been sent to your email address') }
+
+        it 'should send an email to user' do
+          ActionMailer::Base.deliveries.count.should == 1
+          ActionMailer::Base.deliveries.last.to.should include(user.email)
+        end
       end
     end
   end
-
 end

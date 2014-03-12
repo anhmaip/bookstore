@@ -6,6 +6,10 @@ FactoryGirl.define do
     password_confirmation "password"
     phone "+0412345678"
     birthday "07/11/1988"
-    #confirmed_at Time.now
+    confirmed_at Time.now
+  end
+
+  factory :confirmed_user, :parent => :user do
+    after(:create) { |user| user.confirm! }
   end
 end

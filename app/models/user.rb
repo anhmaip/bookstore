@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
   FULL_NAME_MAX_LENGTH = 100
   PASSWORD_MIN_LENGTH = 8
-  VALID_PHONE_REGEX = /\A[+]?[ ]*\d+[- \d]*\z/ # Can start with '+', can only contain digits (at least 1), '-', ' '
+  VALID_PHONE_REGEX = /\A\z|\A[+]?[ ]*\d+[- \d]*\z/ # Can start with '+', can only contain digits (at least 1), '-', ' ', can be empty
 
   # Include default devise modules. Others available are:
   # :confirmable, :trackable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   validates :full_name, presence: true, length: { maximum: FULL_NAME_MAX_LENGTH }
   validates :phone, format: { with: VALID_PHONE_REGEX }
