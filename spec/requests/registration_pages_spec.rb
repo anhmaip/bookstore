@@ -27,7 +27,8 @@ describe "Registration pages" do
     end
 
     describe "with valid information" do
-      #let(:user) { FactoryGirl.create(:user) }
+      let(:user) { FactoryGirl.build(:user) }
+
       before do
         fill_in "Full name", with: "Test User"
         fill_in "Email", with: "testuser@example.com"
@@ -45,9 +46,10 @@ describe "Registration pages" do
         before { click_button signup }
         let(:user) { User.find_by(email: 'testuser@example.com') }
 
+        # TODO change when add email confirm
         it { should have_link(signout) }
         it { should have_link(edit) }
-        it { should have_content(user.full_name) }
+        it { should have_content("Test User") }
       end
     end
   end
