@@ -5,9 +5,8 @@ Feature: Confirm user account
 
     Scenario: User confirms new account successfully
       Given I have signed up for a new account
-      And I have not confirmed before
       When I click on the confirmation link in the confirmation email
       Then I should be redirected to the Sign in page
-      And I should see a successfully confirmed message
-      And My User database record is updated with confirmed time
+      And I should see "Your account was successfully confirmed"
+      And My account should be activated
 

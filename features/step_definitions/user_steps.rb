@@ -1,8 +1,13 @@
-@signup = "Sign up"
-@signin = "Sign in"
-
-def build_user
+Before do
+  @signup = "Sign up"
+  @signin = "Sign in"
+  @signout = "Sign out"
+  @edit_profile = "Edit profile"
   @user ||= FactoryGirl.build(:user)
+end
+
+def find_user
+  User.find_by_email(@user.email)
 end
 
 def sign_up
@@ -16,13 +21,26 @@ def sign_up
   click_button @signup
 end
 
+def delete_user
+  tmpUser = User.find_by_email(@user.email)
+  tmpUser.destroy unless tmpUser.nil?
+end
+
 Given(/^I have signed up for a new account$/) do
-  build_user
+  delete_user
   sign_up
 end
 
-And(/^I have not confirmed before$/) do
-  @user.confirmed_at.should be_nil
+Given(/^I have not signed up for an account$/) do
+  delete_user
+end
+
+And(/^My account is activated$/) do
+  find_user.confirm!
+end
+
+Then(/^My account should be activated$/) do
+  find_user.confirmed_at.should_not be_nil
 end
 
 When(/^I click on the confirmation link in the confirmation email$/) do
@@ -31,13 +49,35 @@ When(/^I click on the confirmation link in the confirmation email$/) do
 end
 
 Then(/^I should be redirected to the Sign in page$/) do
-  page.should have_link(@signin)
+  page.should have_content(@signin)
 end
 
-Then(/^I should see a successfully confirmed message$/) do
-  page.should have_content("Your account was successfully confirmed")
+Then(/^I should be signed in$/) do
+  page.should have_content @signout
+  page.should have_content @edit_profile
+  page.should_not have_content @signin
 end
 
-Then(/^My User database record is updated with confirmed time$/) do
-  User.find_by_email(@user.email).confirmed_at.should_not be_nil
+Then(/^I should not be signed in$/) do
+  page.should have_content "Sign in"
+  page.should_not have_content "Sign out"
+  page.should_not have_content "Edit profile"
+end
+
+When(/^I sign in with valid email and password$/) do
+  visit new_user_session_path
+  fill_in "Email", with: @user.email
+  fill_in "Password", with: @user.password
+  click_button @signin
+end
+
+When(/^I sign in with invalid password$/) do
+  visit new_user_session_path
+  fill_in "Email", with: @user.email
+  fill_in "Password", with: "Wrong password"
+  click_button @signin
+end
+
+Then(/^I should see "(.*?)"$/) do |arg1|
+  page.should have_content arg1
 end
