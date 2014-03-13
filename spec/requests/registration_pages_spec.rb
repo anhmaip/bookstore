@@ -42,7 +42,7 @@ describe "Registration pages" do
         expect { click_button signup }.to change(User, :count).by(1)
       end
 
-      describe "should show confirmation message to user after saving the user" do
+      describe "after saving the user" do
         before do
           ActionMailer::Base.deliveries.clear
           click_button signup
@@ -50,9 +50,24 @@ describe "Registration pages" do
 
         it { should have_content('confirmation link has been sent to your email address') }
 
-        it 'should send an email to user' do
+        it "should send a confirmation email" do
           ActionMailer::Base.deliveries.count.should == 1
-          ActionMailer::Base.deliveries.last.to.should include(user.email)
+        end
+
+        describe "confirmation email" do
+          let(:email) { ActionMailer::Base.deliveries.last }
+
+          it "should send to the right user" do
+            email.to.should include user.email
+          end
+
+          it "should have the right subject" do
+            email.subject.should include("Confirmation")
+          end
+
+          it "should contain the confirmation tokenized link" do
+            email.body.should include("confirmation_token");
+          end
         end
       end
     end
