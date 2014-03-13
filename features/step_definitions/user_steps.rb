@@ -21,6 +21,10 @@ Given(/^I have signed up for a new account$/) do
   sign_up
 end
 
+And(/^I have not confirmed before$/) do
+  @user.confirmed_at.should be_nil
+end
+
 When(/^I click on the confirmation link in the confirmation email$/) do
   token = ActionMailer::Base.deliveries.last.body.match(/confirmation_token=\w*/)
   visit "/users/confirmation?#{token}"
@@ -35,5 +39,5 @@ Then(/^I should see a successfully confirmed message$/) do
 end
 
 Then(/^My User database record is updated with confirmed time$/) do
-  @user.confirmed_at.should_not be_nil
+  User.find_by_email(@user.email).confirmed_at.should_not be_nil
 end
