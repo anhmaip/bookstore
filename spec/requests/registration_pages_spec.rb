@@ -14,7 +14,7 @@ describe "Registration pages" do
       visit new_user_registration_path
     end
 
-    it { should have_content('Sign up') }
+    it { should have_content(signup) }
   end
 
   describe "signup" do
