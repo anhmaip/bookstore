@@ -17,8 +17,6 @@ describe User do
 
   it { should be_valid }
 
-  # validate name
-
   describe "when name is not present" do
     before { user.full_name = " " }
     it { should_not be_valid }
@@ -28,8 +26,6 @@ describe User do
     before { user.full_name = "a" * ( User::FULL_NAME_MAX_LENGTH + 1 ) }
     it { should_not be_valid }
   end
-
-  # validate email
 
   describe "when email is not present" do
     before { user.email = " " }
@@ -72,10 +68,7 @@ describe User do
     end
 
     it { should_not be_valid }
-
   end
-
-  #validate password
 
   describe "when password is not present" do
     before { user.password = "" }
@@ -97,14 +90,10 @@ describe User do
     it { should_not be_valid }
   end
 
-  # validate birthday
-
   describe "when birthday is later than today" do
     before { user.birthday = Date.today + 1 }
     it { should_not be_valid }
   end
-
-  # validate phone
 
   describe "when phone format is invalid" do
     it "should be invalid" do
