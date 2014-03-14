@@ -58,7 +58,7 @@ describe "Registration pages" do
           let(:email) { ActionMailer::Base.deliveries.last }
 
           it "should send to the right user" do
-            email.to.should include user.email
+            email.to.should == [user.email]
           end
 
           it "should have the right subject" do

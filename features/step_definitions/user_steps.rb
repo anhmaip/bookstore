@@ -58,7 +58,7 @@ When(/^I click on "(.*?)" button$/)  do |button|
 end
 
 Then(/^I should receive a confirmation email sent to "(.*?)"$/) do |email|
-  ActionMailer::Base.deliveries.last.to.should include email
+  ActionMailer::Base.deliveries.last.to.should == [email]
 end
 
 When(/^I enter "(.*?)" field with "(.*?)"$/) do |field, value|
