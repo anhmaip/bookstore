@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :category do
-    name "Children"
-    sort_order 1
+    sequence(:name) {|n| "Category #{n}"}
+    sequence(:sort_order)
   end
 end
