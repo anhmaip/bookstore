@@ -7,8 +7,4 @@ FactoryGirl.define do
     phone "+0412345678"
     birthday "07/11/1988"
   end
-
-  factory :confirmed_user, :parent => :user do
-    after(:create) { |user| user.confirm! }
-  end
 end
