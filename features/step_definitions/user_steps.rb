@@ -55,13 +55,40 @@ Given(/^I have an activated account$/) do
   @user.confirm!
 end
 
-When(/^I edit my user profile$/) do
+Given(/^I visit Edit Profile link$/) do
   visit edit_user_registration_path
-  fill_in "Full name", with: "New name"
-  fill_in "Password", with: "newpassword"
-  fill_in "Password confirmation", with: "newpassword"
+end
+
+When(/^I enter new email$/) do
+  fill_in "Email", with: "newemail@example.com"
+end
+
+When(/^I click on "(.*?)" button$/)  do |button|
+  click_button button
+end
+
+When(/^I enter the current password$/) do
   fill_in "Current password", with: @user.password
+end
+
+When(/^I enter new password$/) do
+  fill_in "Password", with: "newpassword"
+end
+
+When(/^I enter new password confirmation$/) do
+  fill_in "Password confirmation", with: "newpassword"
+end
+
+When(/^I enter new non\-password\-required user information$/) do
+  fill_in "Full name", with: "New name"
   fill_in "Phone", with: "9876543"
   fill_in "Birthday", with: Date.today
-  click_button "update"
+end
+
+Then(/^I should receive a confirmation email$/) do
+  ActionMailer::Base.deliveries.last.to.should include @user.email
+end
+
+Then(/^I should receive a confirmation email sent to new email$/) do
+  ActionMailer::Base.deliveries.last.to.should include "newemail@example.com"
 end

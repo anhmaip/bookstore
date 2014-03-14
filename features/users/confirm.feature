@@ -5,6 +5,7 @@ Feature: Confirm user account
 
     Scenario: User confirms new account successfully
       Given I have signed up for a new account
+      Then I should receive a confirmation email
       When I click on the confirmation link in the confirmation email
       Then I should be redirected to the Sign in page
       And I should see "Your account was successfully confirmed"
