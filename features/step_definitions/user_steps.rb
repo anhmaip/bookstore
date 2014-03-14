@@ -7,10 +7,6 @@ Given(/^I have not signed up for an account$/) do
   delete_user
 end
 
-And(/^My account is activated$/) do
-  find_user.confirm!
-end
-
 Then(/^My account should be activated$/) do
   find_user.confirmed_at.should_not be_nil
 end
@@ -52,4 +48,20 @@ end
 
 Then(/^I should see "(.*?)"$/) do |message|
   page.should have_content message
+end
+
+Given(/^I have an activated account$/) do
+  @user.save
+  @user.confirm!
+end
+
+When(/^I edit my user profile$/) do
+  visit edit_user_registration_path
+  fill_in "Full name", with: "New name"
+  fill_in "Password", with: "newpassword"
+  fill_in "Password confirmation", with: "newpassword"
+  fill_in "Current password", with: @user.password
+  fill_in "Phone", with: "9876543"
+  fill_in "Birthday", with: Date.today
+  click_button "update"
 end
