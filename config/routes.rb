@@ -1,7 +1,8 @@
 BookstoreMaiphan::Application.routes.draw do
   get "home/index"
-  root :to => "home#index"
+  root :to => "categories#index"
   devise_for :users, :controllers => { :registrations => "registrations" }
+  resources :categories, only: [:show, :index]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
