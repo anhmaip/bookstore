@@ -33,17 +33,11 @@ Then(/^I should not be signed in$/) do
 end
 
 When(/^I sign in with valid email and password$/) do
-  visit new_user_session_path
-  fill_in "Email", with: @user.email
-  fill_in "Password", with: @user.password
-  click_button "Sign in"
+  sign_in(@user.email, @user.password)
 end
 
 When(/^I sign in with invalid password$/) do
-  visit new_user_session_path
-  fill_in "Email", with: @user.email
-  fill_in "Password", with: "Wrong password"
-  click_button "Sign in"
+  sign_in(@user.email, "Wrongpassword")
 end
 
 Then(/^I should see "(.*?)"$/) do |message|
@@ -59,36 +53,14 @@ Given(/^I visit Edit Profile link$/) do
   visit edit_user_registration_path
 end
 
-When(/^I enter new email$/) do
-  fill_in "Email", with: "newemail@example.com"
-end
-
 When(/^I click on "(.*?)" button$/)  do |button|
   click_button button
 end
 
-When(/^I enter the current password$/) do
-  fill_in "Current password", with: @user.password
+Then(/^I should receive a confirmation email sent to "(.*?)"$/) do |email|
+  ActionMailer::Base.deliveries.last.to.should include email
 end
 
-When(/^I enter new password$/) do
-  fill_in "Password", with: "newpassword"
-end
-
-When(/^I enter new password confirmation$/) do
-  fill_in "Password confirmation", with: "newpassword"
-end
-
-When(/^I enter new non\-password\-required user information$/) do
-  fill_in "Full name", with: "New name"
-  fill_in "Phone", with: "9876543"
-  fill_in "Birthday", with: Date.today
-end
-
-Then(/^I should receive a confirmation email$/) do
-  ActionMailer::Base.deliveries.last.to.should include @user.email
-end
-
-Then(/^I should receive a confirmation email sent to new email$/) do
-  ActionMailer::Base.deliveries.last.to.should include "newemail@example.com"
+When(/^I enter "(.*?)" field with "(.*?)"$/) do |field, value|
+  fill_in field, with: value
 end
