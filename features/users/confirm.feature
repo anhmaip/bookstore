@@ -9,4 +9,3 @@ Feature: Confirm user account
       Then I should be redirected to the Sign in page
       And I should see "Your account was successfully confirmed"
       And My account should be activated
-

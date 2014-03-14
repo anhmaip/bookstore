@@ -78,6 +78,6 @@ When(/^I sign in with invalid password$/) do
   click_button @signin
 end
 
-Then(/^I should see "(.*?)"$/) do |arg1|
-  page.should have_content arg1
+Then(/^I should see "(.*?)"$/) do |message|
+  page.should have_content message
 end
