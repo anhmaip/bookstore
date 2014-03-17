@@ -1,39 +1,33 @@
-#Given(/^Categories have been pre\-populated$/) do
-#  @category ||= FactoryGirl.create(:category)
-#end
-#
-#When(/^I visit the Home page$/) do
-#  visit root_path
-#end
-#
-#Then(/^I should see all categories listed$/) do
-#  page.should have_content(@category.name)
-#end
-
-Given(/^System has (\d+) categories, each has (\d+) books$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Given(/^System has (\d+) categories, each has (\d+) books$/) do |category_count, book_count|
+  @categories ||= FactoryGirl.create_list(:category_with_books, category_count.to_i, book_count: book_count.to_i)
 end
 
 When(/^I visit the Home page$/) do
-  pending # express the regexp above with the code you wish you had
+  visit root_path
 end
 
 Then(/^I should see the links to all categories listed$/) do
-  pending # express the regexp above with the code you wish you had
+  @categories.each do |category|
+    page.should have_link category.name
+  end
 end
 
-When(/^I visit "(.*?)" category link$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I visit category (\d+) link$/) do |category_index|
+  visit category_path(@categories[category_index.to_i])
 end
 
-Then(/^I should see book (\d+) to (\d+) of the category$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see book (\d+) to (\d+) of category (\d+)$/) do |book_index_from, book_index_to, category_index|
+  category = @categories[category_index.to_i]
+  books = category.books[(book_index_from.to_i - 1)..(book_index_to.to_i - 1)]
+  books.each do |book|
+    page.should have_content book.title
+  end
 end
 
-Then(/^I should see page "(.*?)" for the other books$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see page (\d+) for the other books$/) do |page_no|
+  page.should have_link page_no
 end
 
-When(/^I click on page "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^I click on page (\d+)$/) do |page_no|
+  click_link page_no
 end

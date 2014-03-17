@@ -10,8 +10,8 @@ Feature: Browse books
     Then I should see the links to all categories listed
 
   Scenario: User browses for books by selecting a category
-    When I visit category "Category 1" link
-    Then I should see book 1 to 10 of the category
+    When I visit category 1 link
+    Then I should see book 1 to 10 of category 1
     And I should see page 2 for the other books
     When I click on page 2
-    Then I should see book 11 to 15 of the category
+    Then I should see book 11 to 15 of category 1
