@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CategoriesController do
   before do
-    @categories = FactoryGirl.create_list(:category, 2)
+    @categories = FactoryGirl.create_list(:category_with_books, 2, book_count: 2)
     @category = @categories.first
     @category2 = @categories.last
   end
@@ -28,6 +28,10 @@ describe CategoriesController do
 
     it "assigns the requested category to category variable" do
       assigns(:category).should eq(@category)
+    end
+
+    it "assigns the books belong to requested category to books variable" do
+      assigns(:books).count.should eq(@category.books.count)
     end
 
     it "renders the show view" do
