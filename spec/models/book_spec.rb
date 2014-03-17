@@ -7,7 +7,7 @@ describe Book do
   it { should be_valid }
 
   [:title, :description, :author_name, :publisher_name, :published_date,
-   :unit_price, :photo, :total_rating_count, :total_rating_value, :categories].each do |field|
+   :unit_price, :photo, :total_rating_count, :total_rating_value, :categories, :average_rating].each do |field|
   it { should respond_to(field) }
   end
 
