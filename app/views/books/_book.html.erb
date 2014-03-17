@@ -1,4 +1,4 @@
 <li>
-  <h3><%= book.title %></h3>
+  <h3><%= link_to book.title, book_path(book)%></h3>
   <%= book.author_name %>
 </li>

@@ -20,7 +20,7 @@ Then(/^I should see book (\d+) to (\d+) of category (\d+)$/) do |book_index_from
   category = @categories[category_index.to_i]
   books = category.books[(book_index_from.to_i - 1)..(book_index_to.to_i - 1)]
   books.each do |book|
-    page.should have_content book.title
+    page.should have_link book.title
   end
 end
 
