@@ -1,18 +1,25 @@
 require 'spec_helper'
 
 describe CategoriesController do
-
-  before { @category = FactoryGirl.create(:category) }
+  before do
+    @categories = FactoryGirl.create_list(:category, 2)
+    @category = @categories.first
+    @category2 = @categories.last
+  end
 
   describe "GET index" do
     before { get :index }
 
     it "populates an array of categories" do
-      assigns(:categories).should eq([@category])
+      assigns(:categories).should eq(@categories)
     end
 
     it "renders the index view" do
       response.should render_template("index")
+    end
+
+    it "order categories by sort_order" do
+      @category.sort_order.should < @category2.sort_order
     end
   end
 
