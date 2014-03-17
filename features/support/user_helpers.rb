@@ -17,11 +17,6 @@ def sign_up
   click_button @signup
 end
 
-def delete_user
-  tmpUser = User.find_by_email(@user.email)
-  tmpUser.destroy unless tmpUser.nil?
-end
-
 def sign_in(email, password)
   visit new_user_session_path
   fill_in "Email", with: email

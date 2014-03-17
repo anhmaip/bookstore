@@ -1,10 +1,9 @@
 Given(/^I have signed up for a new account$/) do
-  delete_user
   sign_up
 end
 
 Given(/^I have not signed up for an account$/) do
-  delete_user
+  @user.destroy
 end
 
 Then(/^My account should be activated$/) do
