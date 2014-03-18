@@ -39,6 +39,10 @@
       .book-total-rating-count-content{style: "display:inline"}
         = @book.total_rating_count
 
+  .comment-rate-box
+    - if user_signed_in? && (current_user.comments & @book.comments).count <= 0
+      = render "comments/form"
+
   .comments
     .comment-title
       Comments

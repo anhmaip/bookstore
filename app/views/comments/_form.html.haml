@@ -1,0 +1,11 @@
+= form_for [@book, @new_comment] do |f|
+  = f.hidden_field :book_id, value: @book.id
+  .rate-box
+    .comment-rating-label
+      Rate:
+    .comment-ratingp-input
+      = f.select :rating, 1..5
+  .comment-box
+    = f.text_area :content, placeholder: "Post a new comment.."
+  .comment-post
+    = f.submit "Post", class: "btn pull-right"
