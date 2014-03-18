@@ -10,6 +10,7 @@ describe Comment do
     it { should respond_to(field) }
   end
 
+  it { should validate_presence_of(:content) }
   it { should belong_to(:book) }
   it { should belong_to(:user) }
 
