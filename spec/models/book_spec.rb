@@ -6,8 +6,8 @@ describe Book do
 
   it { should be_valid }
 
-  [:title, :description, :author_name, :publisher_name, :published_date,
-   :unit_price, :photo, :total_rating_count, :total_rating_value, :categories, :average_rating].each do |field|
+  [:title, :description, :author_name, :publisher_name, :published_date, :unit_price, :photo,
+   :total_rating_count, :total_rating_value, :categories, :average_rating, :comments].each do |field|
     it { should respond_to(field) }
   end
 
@@ -16,4 +16,5 @@ describe Book do
   end
 
   it { should have_and_belong_to_many(:categories) }
+  it { should have_many(:comments) }
 end

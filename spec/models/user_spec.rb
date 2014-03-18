@@ -6,15 +6,12 @@ describe User do
 
   subject { user }
 
-  it { should respond_to(:full_name) }
-  it { should respond_to(:email) }
-  it { should respond_to(:password) }
-  it { should respond_to(:password_confirmation) }
-  it { should respond_to(:encrypted_password) }
-  it { should respond_to(:birthday) }
-  it { should respond_to(:phone) }
-  it { should respond_to(:created_at) }
+  [:full_name, :email, :password, :password_confirmation, :encrypted_password,
+   :birthday, :phone, :comments].each do |field|
+    it { should respond_to(field) }
+  end
 
+  it { should have_many(:comments) }
   it { should be_valid }
 
   describe "when name is not present" do
