@@ -7,33 +7,35 @@ Feature: Rate and comment books
     And System has some books
 
   Scenario: Not signed in user cannot comment on book
-    Given I visit the link of a book
-    Then I should not see "Comment" box
+    When I visit the link of a book
+    Then I should not see "comment" box
 
   Scenario: Not signed in user cannot rate book
-    Given I visit the link of a book
-    Then I should not see "Rate" box
-
-  Scenario: Signed in user can comment on book for the first time
-    Given I sign in with valid email and password
-    And I visit the link of a book
-    And I have not commented on that book before
-    Then I can comment on that book
-
-  Scenario: Signed in user can rate book for the first time
-    Given I sign in with valid email and password
-    And I visit the link of a book
-    And I have not rated that book before
-    Then I can rate that book
+    When I visit the link of a book
+    Then I should not see "rate" box
 
   Scenario: Signed in user can only comment once
-    Given I sign in with valid email and password
+    When I sign in with valid email and password
     And I visit the link of a book
     And I have commented on that book before
-    Then I should not see "Comment" box
+    Then I should not see "comment" box
 
   Scenario: Signed in user can only rate once
-    Given I sign in with valid email and password
+    When I sign in with valid email and password
     And I visit the link of a book
     And I have rated that book before
-    Then I should not see "Rate" box
+    Then I should not see "rate" box
+
+  Scenario: Signed in user can rate and comment on book for the first time
+    When I sign in with valid email and password
+    And I visit the link of a book
+    Then I should see "comment" box
+    And I should see "rate" box
+    When I comment "My comment" and rate 3
+    Then I should see "Comment posted!"
+
+  Scenario: User can only rate when also comment
+    When I sign in with valid email and password
+    And I visit the link of a book
+    When I comment "" and rate 3
+    Then I should see "Error occured while posting comment, please try again!"
