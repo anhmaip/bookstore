@@ -7,11 +7,11 @@ describe Category do
   it { should be_valid }
 
   [:name, :sort_order, :books].each do |field|
-  it { should respond_to(field) }
+    it { should respond_to(field) }
   end
 
   [:name, :sort_order].each do |field|
-  it { should validate_presence_of(field) }
+    it { should validate_presence_of(field) }
   end
 
   it { should have_and_belong_to_many(:books) }
