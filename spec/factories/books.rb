@@ -9,5 +9,13 @@ FactoryGirl.define do
     photo "photo.jpg"
     total_rating_count 0
     total_rating_value 0
+
+    factory :book_with_comments do
+      ignore do
+        comment_count 10
+      end
+
+      comments { create_list(:comment, comment_count) }
+    end
   end
 end

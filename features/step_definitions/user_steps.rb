@@ -56,6 +56,10 @@ When(/^I click on "(.*?)" button$/)  do |button|
   click_button button
 end
 
+Then(/^I should receive a confirmation email$/) do
+  ActionMailer::Base.deliveries.last.to.should == [@user.email]
+end
+
 Then(/^I should receive a confirmation email sent to "(.*?)"$/) do |email|
   ActionMailer::Base.deliveries.last.to.should == [email]
 end
