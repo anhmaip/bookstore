@@ -1,0 +1,9 @@
+%li
+  .comment-content
+    = comment.content
+  .comment-rating
+    = "Rate: " + comment.rating.to_s
+  .comment-user
+    = "By " + comment.user.full_name
+  .comment-date
+    = comment.created_at

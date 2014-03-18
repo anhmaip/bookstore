@@ -21,3 +21,10 @@ book1 = Book.create(title: "Ruby on Rails", description: "This is a tutorial for
                     total_rating_count: 2, total_rating_value: 5)
 
 category1.books << book1
+
+user1 = User.create(full_name: "Commentor1", email: "commentor1@foo.bar",
+                    password: "password", password_confirmation: "password", confirmed_at: "2000/10/10")
+
+comment1 = Comment.create(rating: 2, content: "This is a comment for ror book", user: user1, book: book1)
+
+book1.comments << comment1

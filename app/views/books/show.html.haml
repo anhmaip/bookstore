@@ -1,0 +1,49 @@
+.book-container
+  .book
+    .book-title
+      %h1
+        = @book.title
+    .book-author
+      .book-author-label{style: "display:inline"}
+        By:
+      .book-author-content{style: "display:inline"}
+        = @book.author_name
+    .book-description
+      .book-description-label{style: "display:inline"}
+        Description:
+      .book-description-content{style: "display:inline"}
+        = @book.description
+    .book-publisher
+      .book-publisher-label{style: "display:inline"}
+        Publisher:
+      .book-publisher-content{style: "display:inline"}
+        = @book.publisher_name
+    .book-published-date
+      .book-published-date-label{style: "display:inline"}
+        Published date:
+      .book-published-date-content{style: "display:inline"}
+        = @book.published_date
+    .book-price
+      .book-price-label{style: "display:inline"}
+        Price:
+      .book-price-content{style: "display:inline"}
+        = @book.unit_price.to_s + "$"
+    .book-average-rating
+      .book-average-rating-label{style: "display:inline"}
+        Average rating:
+      .book-average-rating-content{style: "display:inline"}
+        = @book.average_rating
+    .book-total-rating-count
+      .book-total-rating-count-label{style: "display:inline"}
+        Total rating count:
+      .book-total-rating-count-content{style: "display:inline"}
+        = @book.total_rating_count
+
+  .comments
+    .comment-title
+      Comments
+      = "(" + @comments.count.to_s + ")"
+    .comment-list
+      %ul.comments
+        = render @comments
+      = will_paginate @comments

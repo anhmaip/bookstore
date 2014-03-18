@@ -8,4 +8,4 @@ Feature: View book details
   Scenario: User views book details
     When I visit the link of a book
     Then I should see all details of the book
-
+    And I should see the comment list of the book
