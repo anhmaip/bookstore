@@ -15,7 +15,6 @@ describe BooksController do
 
     it "assigns the comments belong to requested book to comments variable" do
       assigns(:comments).count.should eq(book.comments.count)
-      assigns(:comments).first.book.id should eq(book.id)
     end
   end
 end
