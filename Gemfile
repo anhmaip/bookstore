@@ -8,7 +8,7 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'devise'
-
+gem 'figaro'
 gem "letter_opener", :group => :development
 
 group :development, :test do
