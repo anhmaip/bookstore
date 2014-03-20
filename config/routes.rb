@@ -4,8 +4,11 @@ BookstoreMaiphan::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :categories, only: [:show, :index]
 
-  resources :books, only: [:show] do
+  resources :books, only: [:show, :index] do
     resources :comments, only: [:create]
+    collection do
+      get :search
+    end
   end
 
   resources :carts, path: 'cart', only: [:index] do

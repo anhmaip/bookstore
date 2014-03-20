@@ -5,6 +5,10 @@ class Book < ActiveRecord::Base
   has_many :comments
   has_and_belongs_to_many :categories
 
+  searchable do
+    text :title, :author_name
+  end
+
   def average_rating
     if total_rating_count != 0
       total_rating_value.to_f / total_rating_count

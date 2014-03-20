@@ -1,0 +1,10 @@
+%h1 Books
+
+= form_tag search_books_path, :method => :get do
+  %p
+    = text_field_tag :query, params[:query]
+    = submit_tag "Search!"
+
+- if @books.any?
+  %ol
+    = render @books
