@@ -11,6 +11,8 @@ gem 'devise'
 gem 'figaro'
 gem 'haml'
 gem 'haml-rails'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 
 gem "letter_opener", :group => :development
 
