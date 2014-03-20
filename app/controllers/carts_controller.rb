@@ -2,6 +2,12 @@ class CartsController < ApplicationController
   before_action :create_cart
 
   def update_cart
+    if user_signed_in? || !@cart.expired?
+      @cart.update_cart(params[:book_ids], params[:quantities])
+      redirect_to carts_path
+    else
+      expire
+    end
   end
 
   def add_book

@@ -45,9 +45,15 @@ describe Cart do
       describe "when book is added again to cart" do
         before { cart.add_book(book.id) }
 
-        it "should increase the amount of that book in session cart" do
+        it "should not change the number of book item in cart" do
           expect(cart.session[:cart][:books].count).to eq 1
+        end
+
+        it "should update quantity of that book" do
           expect(cart.session[:cart][:books][book.id][:quantity]).to eq 2
+        end
+
+        it "should update total price of that book" do
           expect(cart.session[:cart][:books][book.id][:total_price]).to eq (book.unit_price * 2)
         end
 
@@ -60,6 +66,46 @@ describe Cart do
     describe "when book cannot be found in database" do
       it "should not add a book to session cart" do
         expect { cart.add_book("0") }.to change(cart.session[:cart][:books], :count).by(0)
+      end
+    end
+  end
+
+  describe "update cart" do
+    before { cart.add_book(book.id) }
+
+    describe "when new quantity is positive" do
+      let(:new_quantity) { 2 }
+
+      before do
+        cart.update_cart([book.id], [new_quantity])
+      end
+
+      it "should update quantity of book item" do
+        expect(cart.session[:cart][:books][book.id][:quantity]).to eq new_quantity
+      end
+
+      it "should update total price of book item" do
+        expect(cart.session[:cart][:books][book.id][:total_price]).to eq (book.unit_price * new_quantity)
+      end
+
+      it "should update total amount" do
+        expect(cart.session[:cart][:total_amount]).to eq (book.unit_price * new_quantity)
+      end
+    end
+
+    describe "when new quantity is invalid" do
+      quantities = [0, "-1", ""]
+
+      quantities.each do |quantity|
+        before do
+          cart.update_cart([book.id], [quantity])
+        end
+
+        it "should not update cart" do
+          expect(cart.session[:cart][:books].count).to eq 1
+          expect(cart.session[:cart][:books][book.id][:quantity]).to eq 1
+          expect(cart.session[:cart][:books][book.id][:total_price]).to eq book.unit_price
+        end
       end
     end
   end

@@ -32,7 +32,10 @@ class Cart
   def remove_book(book_id)
   end
 
-  def update_cart
+  def update_cart(book_ids, quantities)
+    book_ids.each_with_index do |book_id, index|
+      update_item(book_id, quantities[index])
+    end
   end
 
   def expired?
@@ -42,5 +45,17 @@ class Cart
   private
     def set_book(book_id)
       @requested_book = Book.find_by_id(book_id) unless book_id.nil?
+    end
+
+    def update_item(book_id, quantity)
+      if !book_id.nil? && !quantity.nil? && quantity.to_i > 0
+        book = Book.find_by_id(book_id) unless book_id.nil?
+        unless book.nil?
+          quantity_diff = quantity.to_i - @books[book_id][:quantity].to_i
+          @books[book_id][:quantity] = quantity
+          @books[book_id][:total_price] = quantity.to_i * book.unit_price
+          self.session[:cart][:total_amount] += quantity_diff * book.unit_price
+        end
+      end
     end
 end

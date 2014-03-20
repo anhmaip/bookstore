@@ -23,7 +23,7 @@ Then(/^I should see book (\d+) title, author, unit price, quantity = (\d+)$/) do
   page.should have_content(book.title)
   page.should have_content(book.author_name)
   page.should have_content(book.unit_price)
-  page.should have_content(quantity)
+  page.all("input#quantities_")[book_index.to_i - 1][:value].should eq quantity
 end
 
 Then(/^I should see total amount equals to (\d+)$/) do |amount|
