@@ -3,10 +3,18 @@ BookstoreMaiphan::Application.routes.draw do
   root :to => "categories#index"
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :categories, only: [:show, :index]
+
   resources :books, only: [:show] do
     resources :comments, only: [:create]
   end
 
+  resources :carts, path: 'cart', only: [:index] do
+    collection do
+      post 'add_book'
+      delete 'remove_book'
+      put 'update_cart'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

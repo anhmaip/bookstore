@@ -38,6 +38,8 @@
         Total rating count:
       .book-total-rating-count-content{style: "display:inline"}
         = @book.total_rating_count
+    .add-to-cart-button
+      = button_to "Add to cart", add_book_carts_path(book_id: @book.id), method: "post", class: "add-to-class-btn"
 
   .comment-rate-box
     - if user_signed_in? && (current_user.comments & @book.comments).count <= 0

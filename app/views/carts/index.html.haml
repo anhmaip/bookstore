@@ -1,0 +1,26 @@
+.cart-container
+  .cart-title
+    %h1 Shopping cart
+  .cart-body
+    %table.cart-item-table
+      %thead.cart-item-head
+        %tr
+          %td Title
+          %td Author
+          %td Unit price
+          %td Quantity
+          %td Total price
+      - @cart_items.keys.each do |book_id|
+        - cart_item = @cart_items[book_id]
+        - book = Book.find_by_id(book_id)
+        %tr.cart-item-row
+          %td= book.title
+          %td= book.author_name
+          %td= book.unit_price
+          %td.quantity= cart_item[:quantity]
+          %td= cart_item[:total_price]
+    .total-amount
+      .total-amount-label
+        %b Total amount:
+      .total-amount-value
+        = "#{session[:cart][:total_amount]}$"
