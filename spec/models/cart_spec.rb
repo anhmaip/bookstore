@@ -28,7 +28,7 @@ describe Cart do
     end
   end
 
-  describe "add book" do
+  describe "add book to cart" do
     describe "when book can be found in database" do
       before { cart.add_book(book.id) }
 
@@ -107,6 +107,21 @@ describe Cart do
           expect(cart.session[:cart][:books][book.id][:total_price]).to eq book.unit_price
         end
       end
+    end
+  end
+
+  describe "remove book from cart" do
+    before do
+      cart.add_book(book.id)
+      cart.remove_book(book.id)
+    end
+
+    it "should remove the book from cart" do
+      expect(cart.session[:cart][:books]).not_to have_key(book.id)
+    end
+
+    it "should update total amount" do
+      expect(cart.session[:cart][:total_amount]).to eq 0
     end
   end
 end
