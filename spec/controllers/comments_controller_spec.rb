@@ -43,7 +43,7 @@ describe CommentsController do
     describe "with invalid attributes" do
       before { comment.content = "" }
 
-      it "does not a new comment" do
+      it "does not create a new comment" do
         expect { post(:create, book_id: book.id, comment: comment.attributes) }.not_to change(Comment, :count)
       end
 
