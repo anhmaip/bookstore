@@ -14,7 +14,7 @@ describe BooksController do
     end
 
     it "assigns the comments belong to requested book to comments variable" do
-      assigns(:comments).count.should eq(book.comments.count)
+      assigns(:comments).should =~ book.comments
     end
   end
 end

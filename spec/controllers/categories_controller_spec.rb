@@ -31,7 +31,7 @@ describe CategoriesController do
     end
 
     it "assigns the books belong to requested category to books variable" do
-      assigns(:books).count.should eq(@category.books.count)
+      assigns(:books).should =~ @category.books
     end
 
     it "renders the show view" do

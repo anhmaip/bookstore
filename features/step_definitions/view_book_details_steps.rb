@@ -7,14 +7,10 @@ When(/^I visit the link of a book$/) do
 end
 
 Then(/^I should see all details of the book$/) do
-  page.should have_content(@book.title)
-  page.should have_content(@book.description)
-  page.should have_content(@book.author_name)
-  page.should have_content(@book.publisher_name)
-  page.should have_content(@book.published_date)
-  page.should have_content(@book.unit_price)
-  page.should have_content(@book.total_rating_count)
-  page.should have_content(@book.average_rating)
+  [:title, :description, :author_name, :publisher_name, :published_date,
+   :unit_price, :total_rating_count, :average_rating].each do |attribute|
+    page.should have_content(@book.send(attribute))
+  end
 end
 
 And(/^I should see the comment list of the book$/) do

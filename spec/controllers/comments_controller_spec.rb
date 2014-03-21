@@ -10,7 +10,9 @@ describe CommentsController do
 
     describe "with valid attributes" do
       it "creates a new comment" do
-        expect { post(:create, book_id: book.id, comment: comment.attributes) }.to change(Comment, :count).by(1)
+        expect {
+          post(:create, book_id: book.id, comment: comment.attributes)
+        }.to change(Comment, :count).by(1)
       end
 
       it "imcrements total rating count of book by 1" do

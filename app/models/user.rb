@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   PASSWORD_MIN_LENGTH = 8
   VALID_PHONE_REGEX = /\A\z|\A[+]?[ ]*\d+[- \d]*\z/ # Can start with '+', can only contain digits (at least 1), '-', ' ', can be empty
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
   
   # Include default devise modules. Others available are:
   # :confirmable, :trackable, :lockable, :timeoutable and :omniauthable

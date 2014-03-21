@@ -2,7 +2,7 @@ class Book < ActiveRecord::Base
   validates :title, presence: true
   validates :unit_price, presence: true
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_and_belongs_to_many :categories
 
   self.per_page = 10
