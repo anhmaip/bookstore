@@ -15,7 +15,7 @@
           - cart_item = @cart_items[book_id]
           - book = Book.find_by_id(book_id)
           %tr.cart-item-row
-            %td= book.title
+            %td= link_to book.title, book_path(book), method: :get
             %td= book.author_name
             %td= book.unit_price
             %td.quantity
