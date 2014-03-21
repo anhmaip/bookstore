@@ -4,7 +4,7 @@
     .comment-rating-label
       Rate:
     .comment-ratingp-input
-      = f.select :rating, 1..5
+      = f.select :rating, Comment::RATING_VALUES
   .comment-box
     = f.text_area :content, placeholder: "Post a new comment.."
   .comment-post

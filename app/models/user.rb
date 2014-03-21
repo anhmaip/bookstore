@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
   validates :phone, format: { with: VALID_PHONE_REGEX }
   validate :birthday_no_later_than_today
 
+  def commented_on_book?(book)
+    comments.exists?(book_id: book.id)
+  end
+
   private
     def birthday_no_later_than_today
       errors.add(:birthday, "must be no later than today") if

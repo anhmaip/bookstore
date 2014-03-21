@@ -27,7 +27,7 @@
       .book-price-label{style: "display:inline"}
         Price:
       .book-price-content{style: "display:inline"}
-        = @book.unit_price.to_s + "$"
+        = "#{@book.unit_price.to_s} $"
     .book-average-rating
       .book-average-rating-label{style: "display:inline"}
         Average rating:
@@ -42,13 +42,13 @@
       = button_to "Add to cart", add_book_carts_path(book_id: @book.id), method: "post", class: "add-to-class-btn"
 
   .comment-rate-box
-    - if user_signed_in? && (current_user.comments & @book.comments).count <= 0
+    - if user_signed_in? && !current_user.commented_on_book?(@book)
       = render "comments/form"
 
   .comments
     .comment-title
       Comments
-      = "(" + @comments.count.to_s + ")"
+      = "(#{@comments.count.to_s})"
     .comment-list
       %ul.comments
         = render @comments

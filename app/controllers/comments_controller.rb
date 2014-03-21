@@ -6,11 +6,10 @@ class CommentsController < ApplicationController
       book.update_attributes({total_rating_count: book.total_rating_count + 1,
                               total_rating_value: book.total_rating_value + comment.rating})
       flash[:success] = "Comment posted!"
-      redirect_to book_path(book)
     else
       flash[:error] = "Error occured while posting comment, please try again!"
-      redirect_to book_path(book)
     end
+    redirect_to book_path(book)
   end
 
   private

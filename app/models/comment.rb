@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  RATING_VALUES = 1..5
+
   belongs_to :user
   belongs_to :book
 

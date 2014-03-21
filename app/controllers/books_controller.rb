@@ -1,8 +1,8 @@
 class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
-    @comments = @book.comments.order("created_at DESC").paginate(page: params[:page], per_page: Book.per_page)
-    @new_comment = Comment.new
+    @comments = @book.comments.order("created_at DESC").paginate(page: params[:page])
+    @new_comment = @book.comments.new
   end
 
   def search
@@ -13,6 +13,6 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all.paginate(page: params[:page], per_page: 10)
+    @books = Book.all.paginate(page: params[:page], per_page: Book.per_page)
   end
 end
