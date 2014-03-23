@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  include BookHelper
+
   def show
     @book = Book.find(params[:id])
     @comments = @book.comments.order("created_at DESC").paginate(page: params[:page])
@@ -6,13 +8,11 @@ class BooksController < ApplicationController
   end
 
   def search
-    @books = Book.search do
-      keywords params[:query]
-    end.results
-    render :index
+    @books = Book.search params[:query], params[:category], params[:page], Book.per_page
   end
 
   def index
     @books = Book.all.paginate(page: params[:page], per_page: Book.per_page)
+    build_options_for_select_category
   end
 end

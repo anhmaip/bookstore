@@ -1,0 +1,6 @@
+%li
+  .book-item
+    .book-item-title
+      = link_to book.title, book_path(book)
+    .book-item-author
+      = "By: #{book.author_name}"

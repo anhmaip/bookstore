@@ -28,6 +28,7 @@ group :test do
   gem 'database_cleaner'
   gem 'faker'
   gem 'shoulda'
+  gem 'sunspot_test'
 end
 
 group :production do

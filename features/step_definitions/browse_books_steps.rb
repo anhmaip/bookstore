@@ -2,8 +2,8 @@ Given(/^System has (\d+) categories, each has (\d+) books$/) do |category_count,
   @categories ||= FactoryGirl.create_list(:category_with_books, category_count.to_i, book_count: book_count.to_i)
 end
 
-When(/^I visit the Home page$/) do
-  visit root_path
+When(/^I visit the Categories page$/) do
+  visit categories_path
 end
 
 Then(/^I should see the links to all categories listed$/) do

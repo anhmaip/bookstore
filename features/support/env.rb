@@ -6,6 +6,7 @@
 
 require 'cucumber/rails'
 require 'factory_girl'
+require 'sunspot_test/cucumber'
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any

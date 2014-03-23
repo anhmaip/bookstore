@@ -1,6 +1,5 @@
 BookstoreMaiphan::Application.routes.draw do
-  get "home/index"
-  root :to => "categories#index"
+  root :to => "books#index"
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :categories, only: [:show, :index]
 

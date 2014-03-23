@@ -1,0 +1,4 @@
+%h3= "Found #{pluralize(@books.count, 'book')}"
+%ol
+  = render @books
+= will_paginate @books

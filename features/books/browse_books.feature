@@ -6,7 +6,7 @@ Feature: Browse books
     Given System has 2 categories, each has 15 books
 
   Scenario: User sees category list
-    When I visit the Home page
+    When I visit the Categories page
     Then I should see the links to all categories listed
 
   Scenario: User browses for books by selecting a category
