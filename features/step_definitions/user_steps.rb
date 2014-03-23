@@ -11,8 +11,7 @@ Then(/^My account should be activated$/) do
 end
 
 When(/^I click on the confirmation link in the confirmation email$/) do
-  token = ActionMailer::Base.deliveries.last.body.match(/confirmation_token=\w*/)
-  visit "/users/confirmation?#{token}"
+  click_first_link_in_email
 end
 
 Then(/^I should be redirected to the Sign in page$/) do
@@ -44,8 +43,7 @@ Then(/^I should see "(.*?)"$/) do |message|
 end
 
 Given(/^I have an activated account$/) do
-  @user.save
-  @user.confirm!
+  @user = FactoryGirl.create(:confirmed_user)
 end
 
 Given(/^I visit Edit Profile link$/) do
@@ -57,11 +55,13 @@ When(/^I click on "(.*?)" button$/)  do |button|
 end
 
 Then(/^I should receive a confirmation email$/) do
-  ActionMailer::Base.deliveries.last.to.should == [@user.email]
+  unread_emails_for(@user.email).size.should > 0
+  open_email(@user.email)
 end
 
 Then(/^I should receive a confirmation email sent to "(.*?)"$/) do |email|
-  ActionMailer::Base.deliveries.last.to.should == [email]
+  unread_emails_for(email).size.should > 0
+  open_email(email)
 end
 
 When(/^I enter "(.*?)" field with "(.*?)"$/) do |field, value|

@@ -29,6 +29,7 @@ group :test do
   gem 'faker'
   gem 'shoulda'
   gem 'sunspot_test'
+  gem "email_spec"
 end
 
 group :production do
