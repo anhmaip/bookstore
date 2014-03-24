@@ -7,11 +7,12 @@ describe User do
   subject { user }
 
   [:full_name, :email, :password, :password_confirmation, :encrypted_password,
-   :birthday, :phone, :comments].each do |field|
+   :birthday, :phone, :comments, :orders].each do |field|
     it { should respond_to(field) }
   end
 
   it { should have_many(:comments) }
+  it { should have_many(:orders) }
   it { should be_valid }
 
   describe "when name is not present" do

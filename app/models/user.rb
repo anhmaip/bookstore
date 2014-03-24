@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   VALID_PHONE_REGEX = /\A\z|\A[+]?[ ]*\d+[- \d]*\z/ # Can start with '+', can only contain digits (at least 1), '-', ' ', can be empty
 
   has_many :comments, dependent: :destroy
+  has_many :orders, dependent: :destroy
   
   # Include default devise modules. Others available are:
   # :confirmable, :trackable, :lockable, :timeoutable and :omniauthable
