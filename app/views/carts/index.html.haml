@@ -1,33 +1,38 @@
 .cart-container
   .cart-title
     %h1 Shopping cart
-  .cart-body
-    = form_tag update_cart_carts_path, method: :put do
-      %table.cart-item-table
-        %thead.cart-item-head
-          %tr
-            %td Title
-            %td Author
-            %td Unit price
-            %td Quantity
-            %td Total price
-        - @cart_items.keys.each do |book_id|
-          - cart_item = @cart_items[book_id]
-          - book = Book.find_by_id(book_id)
-          %tr.cart-item-row
-            %td= link_to book.title, book_path(book), method: :get
-            %td= book.author_name
-            %td= book.unit_price
-            %td.quantity
-              = hidden_field_tag "book_ids[]", book_id
-              = number_field_tag "quantities[]", cart_item[:quantity], min: 1
-              %td= cart_item[:total_price]
-            %td
-              = link_to "Remove", remove_book_carts_path(book_id: book_id), method: :delete, class: "remove-book-link"
-      - if !@cart_items.keys.empty?
+  - if @cart_items.keys.empty?
+    No item
+  - else
+    .cart-body
+      = form_tag update_cart_carts_path, method: :put do
+        %table.cart-item-table
+          %thead.cart-item-head
+            %tr
+              %td Title
+              %td Author
+              %td Unit price
+              %td Quantity
+              %td Total price
+          - @cart_items.keys.each do |book_id|
+            - cart_item = @cart_items[book_id]
+            - book = Book.find_by_id(book_id)
+            %tr.cart-item-row
+              %td= link_to book.title, book_path(book), method: :get
+              %td= book.author_name
+              %td= book.unit_price
+              %td.quantity
+                = hidden_field_tag "book_ids[]", book_id
+                = number_field_tag "quantities[]", cart_item[:quantity], min: 1
+                %td= cart_item[:total_price]
+              %td
+                = link_to "Remove", remove_book_carts_path(book_id: book_id), method: :delete, class: "remove-book-link"
         = submit_tag "Update", class: "btn"
-      .total-amount
-        .total-amount-label
-          %b Total amount:
-        .total-amount-value
-          = "#{session[:cart][:total_amount]}$"
+        .total-amount
+          .total-amount-label
+            %b Total amount:
+          .total-amount-value
+            = "#{session[:cart][:total_amount]}$"
+
+    = button_to "Checkout", new_order_path, method: :get, class: "btn"
+= button_to "Continue shopping", books_path, method: :get, class: "btn"

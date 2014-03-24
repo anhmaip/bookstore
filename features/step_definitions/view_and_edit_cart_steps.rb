@@ -17,3 +17,11 @@ When(/^I click on "(.*?)" link on book (\d+)$/) do |link, book_index|
     click_on link
   end
 end
+
+And(/^I should not see "(.*?)"$/) do |content|
+  page.should_not have_content(content)
+end
+
+And(/^I should not see "(.*?)" button$/) do |button|
+  page.should_not have_button(button)
+end

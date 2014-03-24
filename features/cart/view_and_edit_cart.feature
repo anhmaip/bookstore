@@ -27,4 +27,6 @@ Feature: View and edit cart
     Then I should see the cart with 1 book(s)
     When I click on "Remove" link on book 1
     Then I should see the cart with 0 book(s)
-    And I should see total amount equals to 0
+    And I should not see "Total amount"
+    And I should not see "Update" button
+    And I should not see "Checkout" button

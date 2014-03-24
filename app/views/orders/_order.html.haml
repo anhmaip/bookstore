@@ -1,0 +1,25 @@
+%li.order
+  .order-date
+    = order.created_at
+  .order-shipping-address
+    = "Address: #{order.shipping_address}"
+  .order-total-amount
+    = "Total amount: #{order.total_amount} $"
+  .order-lines
+    .order-lines-title
+      Items:
+    %table.order-lines-table
+      %thead.order-lines-head
+        %tr
+          %td Title
+          %td Author
+          %td Unit price
+          %td Quantity
+          %td Total price
+      - order.order_lines.each do |order_line|
+        %tr.order-line
+          %td= link_to order_line.book.title, book_path(order_line.book), method: :get
+          %td= order_line.book.author_name
+          %td= order_line.unit_price
+          %td= order_line.quantity
+          %td= order_line.total_price

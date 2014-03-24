@@ -17,6 +17,8 @@ BookstoreMaiphan::Application.routes.draw do
       put 'update_cart'
     end
   end
+
+  resources :orders, only: [:index, :create, :new]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

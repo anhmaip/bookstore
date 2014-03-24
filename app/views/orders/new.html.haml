@@ -1,0 +1,7 @@
+.confirm-order
+  %h1 Confirm order
+  = form_for @order, url: {action: :create} do |f|
+    .shipping-address
+      = f.label :shipping_address
+      = f.text_area :shipping_address
+    = f.submit "Confirm"
