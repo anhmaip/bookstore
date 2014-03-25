@@ -7,7 +7,7 @@ describe User do
   subject { user }
 
   [:full_name, :email, :password, :password_confirmation, :encrypted_password,
-   :birthday, :phone, :comments, :orders].each do |field|
+   :birthday, :phone, :comments, :orders, :admin].each do |field|
     it { should respond_to(field) }
   end
 
