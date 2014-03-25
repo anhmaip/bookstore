@@ -12,6 +12,7 @@ gem 'figaro'
 gem 'haml-rails'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'rails_admin'
 
 gem "letter_opener", :group => :development
 
