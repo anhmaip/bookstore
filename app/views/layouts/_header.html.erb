@@ -11,6 +11,7 @@
               <% if current_user.admin? %>
                   <li><%= link_to "Admin", rails_admin_path %></li>
               <% end %>
+              <li><%= link_to 'Orders', orders_path %></li>
               <li>Signed in as <strong><%= current_user.full_name %></strong></li>
               <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
               <li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>

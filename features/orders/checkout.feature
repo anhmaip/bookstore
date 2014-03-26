@@ -26,3 +26,17 @@ Feature:
     Then I should see "You need to sign in or sign up before continuing"
     When I sign in with valid email and password
     Then I should see "Confirm order"
+
+  Scenario: Signed in user can view past orders
+    Given I sign in with valid email and password
+    Then I should see "Orders" link
+    When I visit the Orders link
+    Then I should see my past order list
+
+  Scenario: Anonymous user is forced to sign in before viewing past orders
+    When I visit the Home page
+    Then I should not see "Orders" link
+    When I visit the Orders link
+    Then I should see "You need to sign in or sign up before continuing"
+    When I sign in with valid email and password
+    Then I should see my past order list

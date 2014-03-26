@@ -6,6 +6,10 @@ When(/^I fill in "(.*?)" with "(.*?)"$/) do |field, value|
   fill_in field, with: value
 end
 
+When(/^I visit the Orders link$/) do
+  visit orders_path
+end
+
 Then(/^I should see my past order list$/) do
   page.should have_content("past orders")
   page.should have_selector(".orders")
