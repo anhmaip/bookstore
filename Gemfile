@@ -13,6 +13,8 @@ gem 'haml-rails'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'rails_admin'
+gem 'faker'
+gem 'googlebooks'
 
 gem "letter_opener", :group => :development
 
@@ -27,7 +29,6 @@ group :test do
   gem 'factory_girl_rails', '4.2.1'
   gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner'
-  gem 'faker'
   gem 'shoulda'
   gem 'sunspot_test'
   gem "email_spec"

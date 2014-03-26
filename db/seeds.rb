@@ -5,26 +5,92 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'faker'
 
+def create_admin
+  User.create(email: "admin@bookstore.com", full_name: "admin",
+              password: "password", password_confirmation: "password",
+              birthday: "1988/07/22", phone: "+84 123456789",
+              confirmed_at: Date.today, admin: true)
+end
 
-category1 = Category.create(name: "Technology", sort_order: 1)
-Category.create(name: "Children", sort_order: 2)
-Category.create(name: "Travel", sort_order: 3)
-Category.create(name: "Romance", sort_order: 4)
-Category.create(name: "Category 7", sort_order: 7)
-Category.create(name: "Category 5", sort_order: 5)
-Category.create(name: "Category 8", sort_order: 8)
-Category.create(name: "Category 6", sort_order: 6)
+def create_users(count)
+  count.to_i.times do
+    name = Faker::Name.name
+    User.create(full_name: name, email: Faker::Internet.email(name),
+                password: "password", password_confirmation: "password",
+                birthday: rand(50.years).ago, phone: "+84 #{Faker::Number.number(9)}",
+                confirmed_at: rand(2.years).ago, admin: false)
+  end
+end
 
-book1 = Book.create(title: "Ruby on Rails", description: "This is a tutorial for RoB", author_name: "Michael Hart",
-                    unit_price: 22.7, publisher_name: "Kim Dong", published_date: "2008/02/22",
-                    total_rating_count: 2, total_rating_value: 5)
+def create_categories
+  names = ["Technology", "Arts & Photography", "Fiction & Literature", "Classics", "Children's books"]
+  names.each_with_index do |name, index|
+    Category.create(name: name, sort_order: (index + 1)*10)
+  end
+end
 
-category1.books << book1
+def create_books(count_range)
+  Category.all.each do |category|
+    book_count = rand(eval(count_range.to_s)).to_i
+    books = GoogleBooks.search(category.name, {count: book_count}).entries
+    i = 0
+    while i < book_count do
+      category.books.create(title: books[i].title,
+                            description: books[i].description.to_s[0, 200],
+                            author_name: books[i].authors,
+                            publisher_name: books[i].publisher,
+                            published_date: books[i].published_date,
+                            photo: books[i].image_link,
+                            unit_price: rand(1..100))
+      i += 1
+    end
+  end
+end
 
-user1 = User.create(full_name: "Commentor1", email: "commentor1@foo.bar",
-                    password: "password", password_confirmation: "password", confirmed_at: "2000/10/10")
+def create_orders(count)
+  users = User.where(admin: false)
+  i = 0
+  while i < count.to_i && users.count > 0 do
+    Order.create(user: users[i % users.count], total_amount: 0,
+                 shipping_address: Faker::Address.street_address)
+    i += 1
+  end
+end
 
-comment1 = Comment.create(rating: 2, content: "This is a comment for ror book", user: user1, book: book1)
+def create_order_lines(count_range)
+  books = Book.all
+  orders = Order.all
+  orders.each do |order|
+    order_line_count = rand(eval(count_range.to_s))
+    order_line_count = (order_line_count < books.count) ? order_line_count : books.count
+    i = 0
+    while i < order_line_count do
+      order_line = order.order_lines.create(book: books[i], unit_price: books[i].unit_price, quantity: rand(5))
+      order.update_attribute(:total_amount, order.total_amount + order_line.unit_price * order_line.quantity)
+      i += 1
+    end
+  end
+end
 
-book1.comments << comment1
+def create_rate_and_comment(count_range)
+  users = User.where(admin: false)
+  Book.all.each do |book|
+    comment_count = rand(eval(count_range.to_s))
+    comment_count = (comment_count < users.count) ? comment_count : users.count
+    i = 0
+    while i < comment_count do
+      book.comments.create(user: users[i], rating: rand(1..5), content: Faker::Lorem.paragraph(1))
+      i += 1
+    end
+  end
+end
+
+create_categories
+create_admin
+create_users(ENV['user_count'].present? ? ENV['user_count'] : 5)
+create_books(ENV['book_count_range'].present? ? ENV['book_count_range'] : 4..8)
+create_orders(ENV['order_count'].present? ? ENV['order_count'] : 5)
+create_order_lines(ENV['order_line_count_range'].present? ? ENV['order_line_count_range'] : 2..4)
+create_rate_and_comment(ENV['comment_count_range'].present? ? ENV['comment_count_range'] : 2..4)
