@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe BooksController do
-  let(:book) { FactoryGirl.create(:book_with_comments, comment_count: 2) }
+  let(:book) { FactoryGirl.create(:book) }
+  let(:comments) { FactoryGirl.create_list(:comment, 2, book: book) }
 
   describe "GET show" do
     before { get :show, id: book }
@@ -15,7 +16,7 @@ describe BooksController do
     end
 
     it "assigns the comments belong to requested book to comments variable" do
-      assigns(:comments).should =~ book.comments
+      assigns(:comments).should =~ comments
     end
   end
 

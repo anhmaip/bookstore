@@ -3,7 +3,7 @@ Feature: View book details
   I want to view the details of any book
 
   Background:
-    Given System has some books
+    Given System has a book with 3 comments
 
   Scenario: User views book details
     When I visit the link of a book

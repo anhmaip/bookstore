@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Comment do
-  let(:comment) { FactoryGirl.build(:comment) }
+  let(:book) { FactoryGirl.create(:book) }
+  let(:comment) { FactoryGirl.build(:comment, book: book) }
   subject { comment }
 
   it { should be_valid }
@@ -22,5 +23,15 @@ describe Comment do
   describe "when rating is greater than 5" do
     before { comment.rating = 6 }
     it { should be_invalid }
+  end
+
+  describe "after create" do
+    it "should imcrement total rating count of book by 1" do
+      expect{ comment.save }.to change(book, :total_rating_count).by(1)
+    end
+
+    it "should add new rate to total rating value of book" do
+      expect{ comment.save }.to change(book, :total_rating_value).by(comment.rating)
+    end
   end
 end

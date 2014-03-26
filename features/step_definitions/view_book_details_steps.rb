@@ -1,5 +1,6 @@
-Given(/^System has some books$/) do
-  @book = FactoryGirl.create(:book_with_comments)
+Given(/^System has a book with (\d+) comments$/) do |comment_count|
+  @book = FactoryGirl.create(:book)
+  FactoryGirl.create_list(:comment, comment_count.to_i, book: @book)
 end
 
 When(/^I visit the link of a book$/) do
@@ -14,11 +15,14 @@ Then(/^I should see all details of the book$/) do
 end
 
 And(/^I should see the comment list of the book$/) do
-  comments = @book.comments
-  comments.each do |comment|
-    page.should have_content(comment.content)
-    page.should have_content(comment.rating)
-    page.should have_content(comment.user.full_name)
-    page.should have_content(comment.created_at)
+  comments = @book.comments.order(created_at: :desc)
+  page.should have_selector(".comment", count: comments.count)
+  page.all(".comment").each_with_index do |selector, index|
+    within selector do
+      page.should have_content(comments[index].content)
+      page.should have_content(comments[index].rating)
+      page.should have_content(comments[index].user.full_name)
+      page.should have_content(comments[index].created_at)
+    end
   end
 end

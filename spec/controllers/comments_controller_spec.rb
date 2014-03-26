@@ -15,20 +15,6 @@ describe CommentsController do
         }.to change(Comment, :count).by(1)
       end
 
-      it "imcrements total rating count of book by 1" do
-        expect {
-          post(:create, book_id: book.id, comment: comment.attributes)
-          book.reload
-        }.to change(book, :total_rating_count).by(1)
-      end
-
-      it "add new rate to total rating value of book" do
-        expect {
-          post(:create, book_id: book.id, comment: comment.attributes)
-          book.reload
-        }.to change(book, :total_rating_value).by(comment.rating)
-      end
-
       describe "after creating new comment" do
         before { post(:create, book_id: book.id, comment: comment.attributes) }
 
