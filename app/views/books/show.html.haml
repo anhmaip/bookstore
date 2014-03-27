@@ -3,6 +3,7 @@
     .book-title
       %h1
         = @book.title
+    = image_tag @book.photo.url(:medium)
     .book-author
       .book-author-label{style: "display:inline"}
         By:

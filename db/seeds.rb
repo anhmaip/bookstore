@@ -15,13 +15,11 @@ def create_admin
 end
 
 def create_users(count)
-  i = 1
-  while i <= count.to_i do
-    User.create(full_name: Faker::Name.name, email: "user#{i}@example.com",
+  count.times.each do |index|
+    User.create(full_name: Faker::Name.name, email: "user#{index}@example.com",
                 password: "password", password_confirmation: "password",
                 birthday: rand(50.years).ago, phone: "+84 #{Faker::Number.number(9)}",
                 confirmed_at: rand(2.years).ago, admin: false)
-    i += 1
   end
 end
 
@@ -34,6 +32,7 @@ def create_categories
 end
 
 def create_books(count_range)
+  image_files = Dir.glob("public/system/books/photos/book_covers/*")
   Category.all.each do |category|
     book_count = rand(eval(count_range.to_s)).to_i
     book_count.times do
@@ -42,6 +41,7 @@ def create_books(count_range)
                             author_name: Faker::Name.name,
                             publisher_name: Faker::Company.name,
                             published_date: rand(10.years).ago,
+                            photo: File.open(File.join(Rails.root, image_files.sample)),
                             unit_price: rand(1..100))
     end
   end

@@ -12,6 +12,7 @@ gem 'figaro'
 gem 'haml-rails'
 gem 'rails_admin'
 gem 'faker'
+gem "paperclip"
 
 gem "letter_opener", :group => :development
 

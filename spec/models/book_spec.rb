@@ -23,6 +23,9 @@ describe Book do
   it { should have_and_belong_to_many(:categories) }
   it { should have_many(:comments) }
 
+  it { should have_attached_file(:photo) }
+  it { should validate_attachment_content_type(:photo).allowing('image/*').rejecting('text/*') }
+
   describe "average rating" do
     describe "when book has positive rate count" do
       before do

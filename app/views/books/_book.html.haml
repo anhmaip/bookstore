@@ -1,5 +1,6 @@
 %li
   .book-item
+    = image_tag book.photo.url(:thumb)
     .book-item-title
       = link_to book.title, book_path(book)
     .book-item-author

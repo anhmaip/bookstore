@@ -6,7 +6,6 @@ FactoryGirl.define do
     publisher_name Faker::Company.name
     published_date Date.today
     unit_price Faker::Number.number(2)
-    photo "photo.jpg"
     total_rating_count 0
     total_rating_value 0
 

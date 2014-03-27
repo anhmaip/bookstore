@@ -11,6 +11,9 @@ class Book < ActiveRecord::Base
                                                      lower(author_name) like '%#{keyword.downcase}%'") }
   scope :of_category, ->(category_id) { joins(:categories).where("categories.id='#{category_id}'") }
 
+  has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
+
   self.per_page = 10
 
   def average_rating
