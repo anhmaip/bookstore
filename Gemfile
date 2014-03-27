@@ -14,7 +14,6 @@ gem 'sunspot_rails'
 gem 'sunspot_solr'
 gem 'rails_admin'
 gem 'faker'
-gem 'googlebooks'
 
 gem "letter_opener", :group => :development
 

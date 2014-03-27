@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-require 'faker'
+#require 'faker'
 
 def create_admin
   User.create(email: "admin@bookstore.com", full_name: "admin",
@@ -15,17 +15,20 @@ def create_admin
 end
 
 def create_users(count)
-  count.to_i.times do
+  i = 1
+  while i <= count.to_i do
     name = Faker::Name.name
-    User.create(full_name: name, email: Faker::Internet.email(name),
+    User.create(full_name: name, email: "user#{i}@example.com",
                 password: "password", password_confirmation: "password",
                 birthday: rand(50.years).ago, phone: "+84 #{Faker::Number.number(9)}",
                 confirmed_at: rand(2.years).ago, admin: false)
+    i += 1
   end
 end
 
 def create_categories
-  names = ["Technology", "Arts & Photography", "Fiction & Literature", "Classics", "Children's books"]
+  names = ["Technology", "Arts & Photography", "Fiction & Literature", "Classics",
+           "Children's books", "Romance", "Horror", "Cookery"]
   names.each_with_index do |name, index|
     Category.create(name: name, sort_order: (index + 1)*10)
   end
@@ -34,17 +37,13 @@ end
 def create_books(count_range)
   Category.all.each do |category|
     book_count = rand(eval(count_range.to_s)).to_i
-    books = GoogleBooks.search(category.name, {count: book_count}).entries
-    i = 0
-    while i < book_count do
-      category.books.create(title: books[i].title,
-                            description: books[i].description.to_s[0, 200],
-                            author_name: books[i].authors,
-                            publisher_name: books[i].publisher,
-                            published_date: books[i].published_date,
-                            photo: books[i].image_link,
+    book_count.times do
+      category.books.create(title: Faker::Lorem.sentence,
+                            description: Faker::Lorem.paragraph.truncate(255),
+                            author_name: Faker::Name.name,
+                            publisher_name: Faker::Company.name,
+                            published_date: rand(10.years).ago,
                             unit_price: rand(1..100))
-      i += 1
     end
   end
 end
@@ -81,7 +80,7 @@ def create_rate_and_comment(count_range)
     comment_count = (comment_count < users.count) ? comment_count : users.count
     i = 0
     while i < comment_count do
-      book.comments.create(user: users[i], rating: rand(1..5), content: Faker::Lorem.paragraph(1))
+      book.comments.create(user: users[i], rating: rand(1..5), content: Faker::Lorem.paragraph.truncate(255))
       i += 1
     end
   end
