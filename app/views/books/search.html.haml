@@ -1,4 +1,10 @@
 %h3= "Found #{pluralize(@books.count, 'book')}"
-%ol
+%ul
   = render @books
+= form_tag search_books_path, :method => :get do
+  = hidden_field_tag :query, params[:query]
+  = hidden_field_tag :category, params[:category]
+  = label_tag "Books/page"
+  = number_field_tag :per_page, params[:per_page].present? ? params[:per_page] : Book.per_page, min: 1
+  = submit_tag "Show"
 = will_paginate @books

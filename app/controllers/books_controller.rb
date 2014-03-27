@@ -8,11 +8,11 @@ class BooksController < ApplicationController
   end
 
   def search
-    @books = Book.search params[:query], params[:category], params[:page], Book.per_page
+    @books = Book.search params[:query], params[:category], params[:page], params[:per_page]
   end
 
   def index
-    @books = Book.all.paginate(page: params[:page], per_page: Book.per_page)
+    @books = Book.all.paginate(page: params[:page], per_page: params[:per_page])
     build_options_for_select_category
   end
 end

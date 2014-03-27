@@ -15,3 +15,8 @@ Feature: Browse books
     And I should see page 2 for the other books
     When I click on page 2
     Then I should see book 11 to 15 of category 1
+    When I fill in "per_page" with "5"
+    And I click on "Show" button
+    Then I should see book 1 to 5 of category 1
+    When I click on page 2
+    Then I should see book 6 to 10 of category 1
