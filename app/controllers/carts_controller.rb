@@ -1,6 +1,10 @@
 class CartsController < ApplicationController
   before_action :create_cart
 
+  def index
+    @cart_items = session[:cart][:books]
+  end
+
   def update_cart
     if user_signed_in? || !@cart.expired?
       @cart.update_cart(params[:book_ids], params[:quantities])
@@ -36,7 +40,6 @@ class CartsController < ApplicationController
   private
     def create_cart
       @cart ||= Cart.new(session)
-      @cart_items = session[:cart][:books]
     end
 
     def expire

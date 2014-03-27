@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @orders = Order.where("user_id = #{current_user.id}").order("created_at DESC").paginate(page: params[:page])
+    @orders = current_user.orders.order(created_at: :desc).paginate(page: params[:page])
   end
 
   def new
@@ -12,8 +12,7 @@ class OrdersController < ApplicationController
   def create
     if user_params[:shipping_address].present?
       begin
-        @order = Order.new(user_params)
-        @order.user = current_user
+        @order = current_user.orders.new(user_params)
         @order.create_order(session)
         session[:cart] = nil
         flash[:success] = "Order is confirmed successfully!"

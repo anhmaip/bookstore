@@ -25,7 +25,6 @@ describe BooksController do
     let(:categories) { [["All categories", nil], [category.name, category.id]] }
 
     before do
-      book
       categories
       get :index
     end

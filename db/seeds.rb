@@ -17,8 +17,7 @@ end
 def create_users(count)
   i = 1
   while i <= count.to_i do
-    name = Faker::Name.name
-    User.create(full_name: name, email: "user#{i}@example.com",
+    User.create(full_name: Faker::Name.name, email: "user#{i}@example.com",
                 password: "password", password_confirmation: "password",
                 birthday: rand(50.years).ago, phone: "+84 #{Faker::Number.number(9)}",
                 confirmed_at: rand(2.years).ago, admin: false)

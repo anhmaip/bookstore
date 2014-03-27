@@ -39,8 +39,9 @@ describe OrdersController do
 
       it "saves the new order with the right attributes" do
         post :create, order: order.attributes
-        Order.last.user.should == user
-        Order.last.shipping_address.should == order.shipping_address
+        last_order = Order.last
+        last_order.user.should == user
+        last_order.shipping_address.should == order.shipping_address
       end
 
       describe "after saving new order" do

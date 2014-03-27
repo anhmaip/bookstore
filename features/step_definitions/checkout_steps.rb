@@ -24,6 +24,6 @@ Then(/^I should see my new order at the top of the list with order information a
       total_amount += book.unit_price
     end
     page.should have_content("my address")
-    page.should have_content("#{total_amount} $")
+    page.should have_content(total_amount)
   end
 end

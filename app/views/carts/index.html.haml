@@ -1,7 +1,7 @@
 .cart-container
   .cart-title
     %h1 Shopping cart
-  - if @cart_items.keys.empty?
+  - if @cart_items.blank?
     No item
   - else
     .cart-body
@@ -20,11 +20,11 @@
             %tr.cart-item-row
               %td= link_to book.title, book_path(book), method: :get
               %td= book.author_name
-              %td= book.unit_price
+              %td= number_to_currency(book.unit_price)
               %td.quantity
                 = hidden_field_tag "book_ids[]", book_id
                 = number_field_tag "quantities[]", cart_item[:quantity], min: 1
-                %td= cart_item[:total_price]
+                %td= number_to_currency(cart_item[:total_price])
               %td
                 = link_to "Remove", remove_book_carts_path(book_id: book_id), method: :delete, class: "remove-book-link"
         = submit_tag "Update", class: "btn"
@@ -32,7 +32,7 @@
           .total-amount-label
             %b Total amount:
           .total-amount-value
-            = "#{session[:cart][:total_amount]}$"
+            = number_to_currency(session[:cart][:total_amount])
 
     = button_to "Checkout", new_order_path, method: :get, class: "btn"
 = button_to "Continue shopping", books_path, method: :get, class: "btn"

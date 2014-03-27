@@ -27,7 +27,7 @@
       .book-price-label{style: "display:inline"}
         Price:
       .book-price-content{style: "display:inline"}
-        = "#{@book.unit_price.to_s} $"
+        = number_to_currency(@book.unit_price)
     .book-average-rating
       .book-average-rating-label{style: "display:inline"}
         Average rating:
@@ -47,8 +47,7 @@
 
   .comments
     .comment-title
-      Comments
-      = "(#{@comments.count.to_s})"
+      = "Comments (#{@comments.count})"
     .comment-list
       %ul.comments
         = render @comments

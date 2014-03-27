@@ -1,13 +1,13 @@
 %h1 Books
 
-= form_tag search_books_path, :method => :get do
+= form_tag search_books_path, method: :get do
   = text_field_tag :query, nil, placeholder: "Title/Author name"
   = select_tag :category, options_for_select(@categories)
   = submit_tag "Search"
 
 %ol
   = render @books
-= form_tag books_path, :method => :get do
+= form_tag books_path, method: :get do
   = label_tag "Books/page"
   = number_field_tag :per_page, params[:per_page].present? ? params[:per_page] : Book.per_page, min: 1
   = submit_tag "Show"

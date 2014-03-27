@@ -14,11 +14,7 @@ class Book < ActiveRecord::Base
   self.per_page = 10
 
   def average_rating
-    if total_rating_count > 0
-      (total_rating_value.to_f / total_rating_count).round(2)
-    else
-      0
-    end
+    total_rating_count <= 0 ? 0 : (total_rating_value.to_f / total_rating_count).round(2)
   end
 
   def self.search keyword, category_id, page, per_page
