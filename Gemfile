@@ -10,8 +10,6 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'devise'
 gem 'figaro'
 gem 'haml-rails'
-gem 'sunspot_rails'
-gem 'sunspot_solr'
 gem 'rails_admin'
 gem 'faker'
 
@@ -29,7 +27,6 @@ group :test do
   gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner'
   gem 'shoulda'
-  gem 'sunspot_test'
   gem "email_spec"
 end
 

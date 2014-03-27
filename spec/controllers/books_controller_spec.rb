@@ -43,11 +43,8 @@ describe BooksController do
     end
   end
 
-  describe "GET search", :search => true do
-    before do
-      book.index!
-      get :search, query: book.title
-    end
+  describe "GET search" do
+    before { get :search, query: book.title }
 
     it "renders the search view" do
       response.should render_template :search

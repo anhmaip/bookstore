@@ -31,7 +31,7 @@ describe Book do
       end
 
       it "should has the right value for average rating" do
-        book.average_rating.should == book.total_rating_value / book.total_rating_count
+        book.average_rating.should == (book.total_rating_value / book.total_rating_count).round(2)
       end
     end
 
@@ -46,14 +46,13 @@ describe Book do
     end
   end
 
-  describe "search book function", :search => true do
+  describe "search book function" do
     let(:category) { FactoryGirl.create(:category) }
     let(:wrong_keyword) { "wrong keyword" }
 
     before do
       book.categories << category
       book.save
-      book.index!
     end
 
     it "searches by title without category" do

@@ -7,28 +7,23 @@ class Book < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_and_belongs_to_many :categories
 
-  self.per_page = 10
+  scope :title_or_author_match, ->(keyword) { where("lower(title) like '%#{keyword.downcase}%' or
+                                                     lower(author_name) like '%#{keyword.downcase}%'") }
+  scope :of_category, ->(category_id) { joins(:categories).where("categories.id='#{category_id}'") }
 
-  searchable do
-    text :title, :author_name
-    integer :category, multiple: true do
-      categories.map { |category| category.id }
-    end
-  end
+  self.per_page = 10
 
   def average_rating
     if total_rating_count > 0
-      total_rating_value.to_f / total_rating_count
+      (total_rating_value.to_f / total_rating_count).round(2)
     else
       0
     end
   end
 
-  def self.search keyword, category, page, per_page
-    Sunspot.search(Book) do
-      keywords keyword
-      with :category, category if category.present?
-      paginate page: page, per_page: per_page
-    end.results
+  def self.search keyword, category_id, page, per_page
+    results = Book.title_or_author_match(keyword)
+    results = results.of_category(category_id) if category_id.present?
+    results.paginate(page: page, per_page: per_page)
   end
 end

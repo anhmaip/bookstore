@@ -3,7 +3,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @comments = @book.comments.order("created_at DESC").paginate(page: params[:page])
+    @comments = @book.comments.order(created_at: :desc).paginate(page: params[:page])
     @new_comment = @book.comments.new
   end
 

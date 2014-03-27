@@ -8,13 +8,6 @@ FactoryGirl.define do
         book_count 10
       end
       books { create_list(:book, book_count) }
-
-      after(:build, :create) do |category|
-        category.books.each do |book|
-          book.reload
-          book.index!
-        end
-      end
     end
   end
 end
