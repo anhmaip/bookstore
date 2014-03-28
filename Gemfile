@@ -13,6 +13,7 @@ gem 'haml-rails'
 gem 'rails_admin'
 gem 'faker'
 gem "paperclip"
+gem 'foundation-rails'
 
 gem "letter_opener", :group => :development
 
