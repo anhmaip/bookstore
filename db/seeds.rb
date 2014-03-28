@@ -36,8 +36,8 @@ def create_books(count_range)
   Category.all.each do |category|
     book_count = rand(eval(count_range.to_s)).to_i
     book_count.times do
-      category.books.create(title: Faker::Lorem.sentence,
-                            description: Faker::Lorem.paragraph.truncate(255),
+      category.books.create(title: Faker::Company.catch_phrase,
+                            description: Faker::Lorem.paragraph(15),
                             author_name: Faker::Name.name,
                             publisher_name: Faker::Company.name,
                             published_date: rand(10.years).ago,
@@ -79,7 +79,7 @@ def create_rate_and_comment(count_range)
     comment_count = (comment_count < users.count) ? comment_count : users.count
     i = 0
     while i < comment_count do
-      book.comments.create(user: users[i], rating: rand(1..5), content: Faker::Lorem.paragraph.truncate(255))
+      book.comments.create(user: users[i], rating: rand(1..5), content: Faker::Lorem.paragraph)
       i += 1
     end
   end
