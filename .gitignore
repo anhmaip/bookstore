@@ -25,9 +25,6 @@ doc/
 .DS_Store
 .idea
 .secret
-solr/data
-solr/pids
-solr/development
-solr/test
+/public/system/books/photos/000/*
 # Ignore application configuration
 /config/application.yml
