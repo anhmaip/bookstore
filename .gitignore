@@ -26,5 +26,6 @@ doc/
 .idea
 .secret
 /public/system/books/photos/000/*
+coverage
 # Ignore application configuration
 /config/application.yml
