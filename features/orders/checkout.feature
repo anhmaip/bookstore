@@ -13,7 +13,7 @@ Feature:
     Then I should see "Checkout" button
     When I click on "Checkout" button
     Then I should see "Confirm order"
-    When I fill in "order_shipping_address" with "my address"
+    When I fill in "order[shipping_address]" with "my address"
     And I click on "Confirm" button
     Then I should see "Order is confirmed successfully!"
     And I should see my past order list

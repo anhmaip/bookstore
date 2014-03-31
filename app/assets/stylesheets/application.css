@@ -33,8 +33,9 @@
 }
 
 #top-bar-title {
-    padding-top: 4px;
-    font-size: 1.5rem;
+    font-size: 2rem;
+    vertical-align: middle;
+    font-weight: bold;
 }
 
 #search-bar {
@@ -75,6 +76,12 @@
 .book-price {
     color: #d2784a;
     font-size: 25px;
+    margin-top: 5px
+}
+
+.book-price-thumb {
+    color: #d2784a;
+    font-size: 12px;
     margin-top: 5px
 }
 
@@ -160,6 +167,7 @@
 }
 
 #update-btn {
+    margin-top: 15px;
     width: 80px
 }
 
@@ -191,5 +199,9 @@
 }
 
 .total-price {
+    color: #d2784a;
+}
+
+#user-name {
     color: #d2784a;
 }

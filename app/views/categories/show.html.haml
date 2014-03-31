@@ -18,6 +18,6 @@
                 = number_field_tag :per_page, params[:per_page].present? ? params[:per_page] : Book.per_page, min: 1, id: "per-page-input"
               .small-4.columns
                 = submit_tag "Show", class: "postfix", id: "per-page-show-btn"
-        .medium-3.large-4.columns
-        .medium-5.large-4.columns
+        .medium-2.large-3.columns
+        .medium-6.large-5.columns
           = foundation_paginate @books

@@ -5,7 +5,7 @@
     .medium-9.large-9.columns
       %h3.book-title= @book.title
       %h5.book-author= "by #{@book.author_name}"
-      .book-avg-rating= "Average rating: #{@book.average_rating} (#{@book.total_rating_count})"
+      .book-avg-rating= "Average rating: #{@book.average_rating}/#{Comment::RATING_VALUES.last} (#{@book.total_rating_count})"
       %p.text-justify.book-description= @book.description
       .row
         .small-6.columns

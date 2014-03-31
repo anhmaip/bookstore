@@ -11,7 +11,7 @@
           - if current_user.admin?
             %li= link_to "Admin", rails_admin_path
           %li.has-dropdown
-            = link_to current_user.full_name, '#'
+            = link_to current_user.full_name, '#', id: "user-name"
             %ul.dropdown
               %li= link_to 'Edit profile', edit_user_registration_path
               %li= link_to "Sign out", destroy_user_session_path, method: :delete
