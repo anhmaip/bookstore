@@ -1,5 +1,7 @@
-%h1
-  = "Your past orders (#{@orders.count})"
-%ol.orders
-  = render @orders
-= will_paginate @orders
+.row
+  .column
+    %h3
+      = "Your past orders (#{@orders.count})"
+    %ul.no-bullet.orders
+      = render @orders
+    = foundation_paginate @orders

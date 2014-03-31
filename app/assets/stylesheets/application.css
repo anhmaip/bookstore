@@ -167,3 +167,29 @@
     padding-top: 10px;
     padding-bottom: 10px
 }
+
+#shipping-address-input {
+    height: 10rem
+}
+
+.order-lines-table {
+    width: 100%
+}
+
+.order-shipping-address {
+    color: steelblue;
+    font-size: 16px;
+}
+
+.order-total-amount-value {
+    color: #d2784a;
+    font-size: 14px;
+}
+
+.order-total-amount {
+    margin-top: 20px
+}
+
+.total-price {
+    color: #d2784a;
+}
