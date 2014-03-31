@@ -1,6 +1,4 @@
 class BooksController < ApplicationController
-  include BookHelper
-
   def show
     @book = Book.find(params[:id])
     @comments = @book.comments.order(created_at: :desc).paginate(page: params[:page])

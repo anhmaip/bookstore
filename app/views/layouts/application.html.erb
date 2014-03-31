@@ -14,9 +14,9 @@
 <body>
   <div class="container">
     <%= render 'layouts/header' %>
-    <div class="row flash-container">
+    <div class="row">
       <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
+        <div class="alert-box <%= key %> radius"><%= value %></div>
       <% end %>
     </div>
     <div class="row">

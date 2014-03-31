@@ -1,9 +1,7 @@
-%li.comment
-  .comment-content
-    = comment.content
-  .comment-rating
-    = "Rate: #{comment.rating}"
-  .comment-user
-    = "By #{comment.user.full_name}"
+%li
+  %h5.comment-author= comment.user.full_name
+  .comment-rating= "Rate: #{comment.rating}"
+  %p.text-justify.comment-content= comment.content
   .comment-date
-    = comment.created_at
+    = "Submitted on #{comment.created_at}"
+  %hr.comment-line-split

@@ -42,3 +42,87 @@
     padding-bottom: 5px;
     height: 45px;
 }
+
+.book-title {
+    color: steelblue;
+}
+
+.book-author {
+    color: #d2784a;
+}
+
+.book-description {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.book-publisher {
+    padding-top: 5px;
+    font-style: italic
+}
+
+.book-avg-rating {
+    padding-top: 5px
+}
+
+.book-image {
+    display: block;
+    margin-top: 12px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.book-price {
+    color: #d2784a;
+    font-size: 25px;
+    margin-top: 5px
+}
+
+.add-to-cart-btn {
+    padding: 0;
+}
+
+#comment_rating {
+    padding-top: 3px;
+    height: 25px
+}
+
+#comment_content {
+    height: 6rem
+}
+
+#post-comment-btn {
+    width: 80px
+}
+
+.rate-label {
+    padding-top: 5px;
+}
+
+.comment-title {
+    color: steelblue;
+    padding-bottom: 10px;
+}
+
+.comment-author {
+    color: #d2784a;
+}
+
+.comment-line-split {
+    color: #d3d3d3;
+}
+
+.comment-rating {
+    padding-top: 5px;
+    font-style: italic;
+}
+
+.comment-date {
+    color: darkgray;
+}
+
+.comment-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}

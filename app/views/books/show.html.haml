@@ -1,55 +1,38 @@
 .book-container
-  .book
-    .book-title
-      %h1
-        = @book.title
-    = image_tag @book.photo.url(:medium)
-    .book-author
-      .book-author-label{style: "display:inline"}
-        By:
-      .book-author-content{style: "display:inline"}
-        = @book.author_name
-    .book-description
-      .book-description-label{style: "display:inline"}
-        Description:
-      .book-description-content{style: "display:inline"}
-        = @book.description
-    .book-publisher
-      .book-publisher-label{style: "display:inline"}
-        Publisher:
-      .book-publisher-content{style: "display:inline"}
-        = @book.publisher_name
-    .book-published-date
-      .book-published-date-label{style: "display:inline"}
-        Published date:
-      .book-published-date-content{style: "display:inline"}
-        = @book.published_date
-    .book-price
-      .book-price-label{style: "display:inline"}
-        Price:
-      .book-price-content{style: "display:inline"}
-        = number_to_currency(@book.unit_price)
-    .book-average-rating
-      .book-average-rating-label{style: "display:inline"}
-        Average rating:
-      .book-average-rating-content{style: "display:inline"}
-        = @book.average_rating
-    .book-total-rating-count
-      .book-total-rating-count-label{style: "display:inline"}
-        Total rating count:
-      .book-total-rating-count-content{style: "display:inline"}
-        = @book.total_rating_count
-    .add-to-cart-button
-      = button_to "Add to cart", add_book_carts_path(book_id: @book.id), method: "post", class: "add-to-class-btn"
+  .row
+    .medium-3.large-3.columns
+      .book-image= image_tag @book.photo.url(:medium)
+    .medium-9.large-9.columns
+      %h3.book-title= @book.title
+      %h5.book-author= "by #{@book.author_name}"
+      .book-avg-rating= "Average rating: #{@book.average_rating} (#{@book.total_rating_count})"
+      %p.text-justify.book-description= @book.description
+      .row
+        .small-6.columns
+          .book-publisher= "Publisher: #{@book.publisher_name}"
+          .book-publisher= "Published date: #{@book.published_date}"
+        .small-6.columns
+          .row
+            .small-6.columns
+              %label.right.book-price= number_to_currency(@book.unit_price)
+            .small-6.columns
+              %span.has-tip{title: "Add to cart"}
+                = link_to image_tag(image_url('cart.png')), add_book_carts_path(book_id: @book.id), method: "post"
+  %hr
+  .row
+    .column
+      - if user_signed_in? && !current_user.commented_on_book?(@book)
+        %h4.comment-title Add your comment
+        = render "comments/form"
+      - else
+        - if !user_signed_in?
+          .panel Add your comment by signing in.
+        - else
+          .panel You have rated and commented on this book.
 
-  .comment-rate-box
-    - if user_signed_in? && !current_user.commented_on_book?(@book)
-      = render "comments/form"
-
-  .comments
-    .comment-title
-      = "Comments (#{@comments.count})"
-    .comment-list
-      %ul.comments
+  .row
+    .column
+      %h4.comment-title= "Comments (#{@comments.count})"
+      %ul.no-bullet
         = render @comments
-      = will_paginate @comments
+      = foundation_paginate @comments
