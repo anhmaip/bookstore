@@ -14,7 +14,7 @@ class Book < ActiveRecord::Base
   has_attached_file :photo, :styles => { :medium => "200x300>", :thumb => "100x150>" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
-  self.per_page = 10
+  self.per_page = 12
 
   def average_rating
     total_rating_count <= 0 ? 0 : (total_rating_value.to_f / total_rating_count).round(2)

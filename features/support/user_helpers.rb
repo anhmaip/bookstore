@@ -14,12 +14,12 @@ def sign_up
   fill_in "Password confirmation", with: @user.password_confirmation
   fill_in "Phone", with: @user.phone
   fill_in "Birthday", with: @user.birthday
-  click_button @signup
+  click_button "Sign up"
 end
 
 def sign_in(email, password)
   visit new_user_session_path
   fill_in "Email", with: email
   fill_in "Password", with: password
-  click_button @signin
+  click_button "Sign in"
 end

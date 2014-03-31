@@ -1,14 +1,20 @@
-%h1 Books
-
-= form_tag search_books_path, method: :get do
-  = text_field_tag :query, nil, placeholder: "Title/Author name"
-  = select_tag :category, options_for_select(@categories)
-  = submit_tag "Search"
-
-%ol
-  = render @books
-= form_tag books_path, method: :get do
-  = label_tag "Books/page"
-  = number_field_tag :per_page, params[:per_page].present? ? params[:per_page] : Book.per_page, min: 1
-  = submit_tag "Show"
-= will_paginate @books
+.row
+  .small-4.medium-3.large-3.columns
+    = render partial: 'shared/categories_side_nav'
+  .small-8.medium-9.large-9.columns
+    .row
+      %ul.small-block-grid-1.medium-block-grid-3.large-block-grid-4
+        = render @books
+    .row
+      .medium-4.large-4.columns
+        = form_tag books_path, method: :get do
+          .row.collapse
+            .small-5.columns
+              %label#per-page-label Books/page
+            .small-3.columns
+              = number_field_tag :per_page, params[:per_page].present? ? params[:per_page] : Book.per_page, min: 1, id: "per-page-input"
+            .small-4.columns
+              = submit_tag "Show", class: "postfix", id: "per-page-show-btn"
+      .medium-3.large-4.columns
+      .medium-5.large-4.columns
+        = foundation_paginate @books

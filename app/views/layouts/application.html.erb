@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
+  <title><%= content_for?(:title) ? yield(:title) : "Bookstore" %></title>
 
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "vendor/modernizr" %>
@@ -12,15 +12,17 @@
 </head>
 
 <body>
-<%= render 'layouts/header' %>
-<div class="container">
   <div class="container">
-    <% flash.each do |key, value| %>
+    <%= render 'layouts/header' %>
+    <div class="row flash-container">
+      <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
-    <% end %>
-    <%= yield %>
+      <% end %>
+    </div>
+    <div class="row">
+        <%= yield %>
+    </div>
   </div>
-</div>
 <%= javascript_include_tag "application" %>
 </body>
 </html>

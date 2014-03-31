@@ -13,6 +13,5 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all.paginate(page: params[:page], per_page: params[:per_page])
-    build_options_for_select_category
   end
 end

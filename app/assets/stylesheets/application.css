@@ -13,3 +13,32 @@
 
  *= require_tree .
  */
+#per-page-show-btn {
+    height: 20px;
+    line-height: 1rem;
+    width: 50px;
+    font-size: 0.8rem
+}
+
+#per-page-input {
+    height: 20px;
+    line-height: 1rem;
+    padding-top: 2px;
+    padding-bottom: 0;
+    text-align: right
+}
+
+#per-page-label {
+    padding-top: 2px;
+}
+
+#top-bar-title {
+    padding-top: 4px;
+    font-size: 1.5rem;
+}
+
+#search-bar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 45px;
+}
