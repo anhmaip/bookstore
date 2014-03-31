@@ -10,8 +10,7 @@ Feature: Add book to cart
 
   Scenario: User adds a book to cart
     When I visit the link of book 1
-    Then I should see "Add to cart" button
-    When I click on "Add to cart" button
+    When I click on Add to cart button
     Then I should see the cart with 1 book(s)
     And I should see book 1 title, author, unit price, quantity = 1
     And I should see total amount equals to 10
@@ -19,8 +18,7 @@ Feature: Add book to cart
   Scenario: User adds multiple books to cart
     Given I have added book 1 to cart
     When I visit the link of book 2
-    Then I should see "Add to cart" button
-    When I click on "Add to cart" button
+    When I click on Add to cart button
     Then I should see the cart with 2 book(s)
     And I should see book 1 title, author, unit price, quantity = 1
     And I should see book 2 title, author, unit price, quantity = 1
@@ -29,8 +27,7 @@ Feature: Add book to cart
   Scenario: User adds a book to cart twice
     Given I have added book 1 to cart
     When I visit the link of book 1
-    Then I should see "Add to cart" button
-    When I click on "Add to cart" button
+    When I click on Add to cart button
     Then I should see the cart with 1 book(s)
     And I should see book 1 title, author, unit price, quantity = 2
     And I should see total amount equals to 20

@@ -126,3 +126,39 @@
     margin-bottom: 10px;
     font-size: 14px;
 }
+
+.cart-item-quantity {
+    width: 50px !important;
+    height: 30px !important;
+}
+
+.cart-item-cell {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#continue-shopping-btn {
+    width: 140px
+}
+
+#checkout-btn {
+    width: 80px
+}
+
+#total-amount-label {
+    color: #d2784a;
+    font-weight: bold;
+}
+
+#total-amount-value {
+    color: #d2784a;
+    font-size: 16px;
+}
+
+#cart-item-table {
+    width: 100%
+}
+
+#update-btn {
+    width: 80px
+}

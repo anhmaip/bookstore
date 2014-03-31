@@ -17,10 +17,11 @@
               %label.right.book-price= number_to_currency(@book.unit_price)
             .small-6.columns
               %span.has-tip{title: "Add to cart"}
-                = link_to image_tag(image_url('cart.png')), add_book_carts_path(book_id: @book.id), method: "post"
-  %hr
+                = link_to image_tag(image_url('cart.png')), add_book_carts_path(book_id: @book.id),
+                          method: "post", id: "add-to-cart-btn"
   .row
     .column
+      %hr
       - if user_signed_in? && !current_user.commented_on_book?(@book)
         %h4.comment-title Add your comment
         = render "comments/form"

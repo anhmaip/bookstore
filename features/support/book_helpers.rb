@@ -18,6 +18,6 @@ end
 def add_books_to_cart(books)
   books.each do |book|
     visit book_path(book)
-    click_button "Add to cart"
+    find("#add-to-cart-btn").click
   end
 end

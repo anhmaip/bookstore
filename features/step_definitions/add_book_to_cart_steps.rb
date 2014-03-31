@@ -14,6 +14,10 @@ Then(/^I should see "(.*?)" button$/) do |button|
   page.should have_button(button)
 end
 
+When(/^I click on Add to cart button$/) do
+  find("#add-to-cart-btn").click
+end
+
 Then(/^I should see the cart with (\d+) book\(s\)$/) do |book_count|
   page.should have_selector("tr.cart-item-row", count: book_count.to_i)
 end
@@ -27,12 +31,12 @@ Then(/^I should see book (\d+) title, author, unit price, quantity = (\d+)$/) do
 end
 
 Then(/^I should see total amount equals to (\d+)$/) do |amount|
-  within(".total-amount-value") do
+  within("#total-amount-value") do
     page.should have_content(amount)
   end
 end
 
 Given(/^I have added book (\d+) to cart$/) do |book_index|
   visit book_path(@books[book_index.to_i - 1])
-  click_button "Add to cart"
+  find("#add-to-cart-btn").click
 end
