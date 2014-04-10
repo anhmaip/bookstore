@@ -11,6 +11,7 @@ gem 'haml-rails'
 gem 'rails_admin'
 gem 'faker'
 gem "paperclip"
+gem 'aws-sdk'
 gem 'foundation-rails'
 gem 'foundation-will_paginate'
 
