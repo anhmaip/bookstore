@@ -1,15 +1,13 @@
 == README
 
-Heroku app: http://bookstore-maiphan.herokuapp.com/
+Heroku app: 
 
-	    http://bookstore-maiphan.herokuapp.com/admin
+http://bookstore-maiphan.herokuapp.com/
 
-
-Admin:	
-	email: admin@bookstore.com
-	password: password
+http://bookstore-maiphan.herokuapp.com/admin
 
 
-User:
-	email: user1@example.com
-	password: password
+Admin:	email: 'admin@bookstore.com', password: 'password'
+
+
+User:	email: 'user1@example.com', password: 'password'
