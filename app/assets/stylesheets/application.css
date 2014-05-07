@@ -85,6 +85,10 @@
     margin-top: 5px
 }
 
+.book-item-title, .book-item-author {
+    width: 140px;
+}
+
 .add-to-cart-btn {
     padding: 0;
 }
