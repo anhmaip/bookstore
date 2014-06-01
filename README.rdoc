@@ -11,3 +11,6 @@ Admin:	email: 'admin@bookstore.com', password: 'password'
 
 
 User:	email: 'user1@example.com', password: 'password'
+
+
+Note: In order to use paperclip, the server must have 'imagemagick' for image processing

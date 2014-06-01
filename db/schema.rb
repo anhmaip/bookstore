@@ -45,11 +45,6 @@ ActiveRecord::Schema.define(version: 20140328032550) do
     t.datetime "updated_at"
   end
 
-  create_table "categories_books", id: false, force: true do |t|
-    t.integer "category_id"
-    t.integer "book_id"
-  end
-
   create_table "comments", force: true do |t|
     t.integer  "rating",     default: 0
     t.text     "content"
